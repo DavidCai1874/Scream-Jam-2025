@@ -4,40 +4,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-    public float moveSpeed;
+    public float speed = 6f;
+    public float gravity = -9.81f;
+    public float jumpHeight = 1.5f;
 
-    public Transform orientation;
+    private CharacterController controller;
+    private Vector3 velocity;
+    private bool isGrounded;
 
-    float horizontalInput;
-    float verticalInput;
-
-    Vector3 moveDirection;
-
-    Rigidbody rb;
-
-    private void Start()
+    void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
-    private void FixedUpdate()
+    void Update()
     {
-        MovePlayer();
-    }
+        isGrounded = controller.isGrounded;
+        if (isGrounded && velocity.y < 0)
+            velocity.y = -2f;
 
-    private void MyInput()
-    {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-    }
-    
-    private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-    }
+        Vector3 move = transform.right * x + transform.forward * z;
+        controller.Move(move * speed * Time.deltaTime);
 
+        if (Input.GetButtonDown("Jump") && isGrounded)
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+    }
 }

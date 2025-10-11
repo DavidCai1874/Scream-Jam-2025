@@ -12,7 +12,6 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance { get; private set; }
 
     public event EventHandler OnInteractAction; //hit E
-    public event EventHandler OnInteractAlternateAction; // hit F
     public event EventHandler OnPauseAction; // hit pause
 
     public enum Binding

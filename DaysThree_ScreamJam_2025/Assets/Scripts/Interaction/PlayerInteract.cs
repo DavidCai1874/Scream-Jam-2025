@@ -11,6 +11,7 @@ public class PlayerInteract : MonoBehaviour
     ////////////////
     //SeiralizedFields
     [SerializeField] private GameInput gameInput;
+    [SerializeField] private LayerMask interactLayerMask;
 
 
     ////////////////
@@ -28,25 +29,28 @@ public class PlayerInteract : MonoBehaviour
         public ObjectInteraction selectedObject;
     }
 
-    public event EventHandler OnPickedSomthing;
-
-
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
-
+    private void OnDestroy()
+    {
+        gameInput.OnInteractAction -= GameInput_OnInteractAction;
+    }
 
     ////////////////
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
-        //if (!GameManager.Instance.IsGamePlaying()) return;//if game ends or not started, not able to interact
-
         //Debug.Log("E key pressed!");
         if (selectedObject != null)
         {
-            selectedObject.Interact(this);
+            Debug.Log("Interacting with " + selectedObject.gameObject.name);
+            selectedObject.Interact();
         }
     }
 
@@ -60,27 +64,29 @@ public class PlayerInteract : MonoBehaviour
     private void HandleInteractions()
     {
 
-        float interactDistance = 2f;
+        float interactDistance = 3f;
         
         lastInteractDir = Camera.main.transform.forward;
 
-        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
+        // Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
 
-        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit hit, interactDistance))
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit hit, interactDistance, interactLayerMask))
         {
 
-            Debug.Log("We hit " + hit.transform.gameObject.name + " " + hit.transform.position);
+            // Debug.Log("We hit " + hit.transform.gameObject.name + " " + hit.transform.position);
 
             if (hit.transform.TryGetComponent(out ObjectInteraction objectBeingTouched))
             {
                 if (objectBeingTouched != selectedObject)
                 {
                     SetSelectedObject(objectBeingTouched);
+
                 }
 
             }
             else
             {
+                //RemoveHighlight();
                 SetSelectedObject(null);
             }
 

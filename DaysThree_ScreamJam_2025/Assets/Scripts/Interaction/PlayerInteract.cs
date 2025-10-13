@@ -19,6 +19,7 @@ public class PlayerInteract : MonoBehaviour
     private bool isWalking;
     private Vector3 lastInteractDir;
     private ObjectInteraction selectedObject;
+    private bool isCanvasOpen = false;
 
 
     ////////////////
@@ -32,15 +33,24 @@ public class PlayerInteract : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        isCanvasOpen = false;
     }
 
     private void Start()
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
+        DialogueUI.Instance.OnDialogueClose += DialogueUI_OnDialogueClose;
     }
     private void OnDestroy()
     {
         gameInput.OnInteractAction -= GameInput_OnInteractAction;
+        DialogueUI.Instance.OnDialogueClose -= DialogueUI_OnDialogueClose;
+    }
+
+    private void DialogueUI_OnDialogueClose(object sender, EventArgs e)
+    {
+        isCanvasOpen = false;
+        Debug.Log(isCanvasOpen);
     }
 
     ////////////////
@@ -49,8 +59,13 @@ public class PlayerInteract : MonoBehaviour
         //Debug.Log("E key pressed!");
         if (selectedObject != null)
         {
-            Debug.Log("Interacting with " + selectedObject.gameObject.name);
-            selectedObject.Interact();
+            if (isCanvasOpen == false)
+            {
+                Debug.Log("Interacting with " + selectedObject.gameObject.name);
+                selectedObject.Interact();
+                isCanvasOpen = true;
+                Debug.Log(isCanvasOpen);
+            }
         }
     }
 

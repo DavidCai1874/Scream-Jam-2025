@@ -1253,7 +1253,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 963194227}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1504,7 +1504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1007369993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1748,32 +1748,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307043573}
   m_CullTransparentMesh: 1
---- !u!1 &1342093270 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7051498322237762997, guid: 892b23848c9d06d4885435b846669abf, type: 3}
-  m_PrefabInstance: {fileID: 1543879647}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1342093274
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342093270}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 113.13461, y: 36.379696, z: 57.830597}
-  m_Center: {x: 378.6789, y: 78.9533, z: 223.26286}
 --- !u!1001 &1543879647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8553,10 +8527,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7051498322237762997, guid: 892b23848c9d06d4885435b846669abf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1342093274}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 892b23848c9d06d4885435b846669abf, type: 3}
 --- !u!1 &1605982596
 GameObject:

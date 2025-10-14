@@ -17,5 +17,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Days/Day2_Scene.unity
     guid: e894a6c3dc0302d4fbc4b3501b157bdc
+  - enabled: 1
+    path: Assets/Scenes/Loadings/Loading_Scene_Redemption.unity
+    guid: 7db292f25e221894b86619a0c7bdb8a4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: afbbc9b788f57944494f6764ddaff773, type: 2}

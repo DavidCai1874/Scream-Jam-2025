@@ -69,7 +69,7 @@ public class EndingUI : MonoBehaviour
         OnEndingClose?.Invoke(this, EventArgs.Empty);
         if(gameManager.interactedCount >= 1)
         {
-            Loader.Load(Loader.Scene.Day2_Scene);
+            Loader.LoadNormal(Loader.Scene.Day2_Scene);
         }
 
     }

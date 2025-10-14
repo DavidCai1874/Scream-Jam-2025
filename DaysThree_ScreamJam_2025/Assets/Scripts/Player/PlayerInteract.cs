@@ -8,26 +8,18 @@ public class PlayerInteract : MonoBehaviour
 
     public static PlayerInteract Instance { get; private set; }
 
-    ////////////////
-    //SeiralizedFields
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask interactLayerMask;
 
-
-    ////////////////
-    //vairables
-    private bool isWalking;
     private Vector3 lastInteractDir;
-    private ObjectInteraction selectedObject;
+    private BasicInteraction selectedObject;
     private bool isCanvasOpen = false;
 
 
-    ////////////////
-    //events
     public event EventHandler<OnSelectedObjectChangedEventArgs> OnSelectedObjectChanged;
     public class OnSelectedObjectChangedEventArgs : EventArgs
     {
-        public ObjectInteraction selectedObject;
+        public BasicInteraction selectedObject;
     }
 
     private void Awake()
@@ -38,19 +30,25 @@ public class PlayerInteract : MonoBehaviour
 
     private void Start()
     {
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        gameInput.E_Pressed += GameInput_OnInteractAction;
         DialogueUI.Instance.OnDialogueClose += DialogueUI_OnDialogueClose;
+        EndingUI.Instance.OnEndingClose += EndingUI_OnClose;
     }
     private void OnDestroy()
     {
-        gameInput.OnInteractAction -= GameInput_OnInteractAction;
+        gameInput.E_Pressed -= GameInput_OnInteractAction;
         DialogueUI.Instance.OnDialogueClose -= DialogueUI_OnDialogueClose;
+        EndingUI.Instance.OnEndingClose -= EndingUI_OnClose;
     }
 
     private void DialogueUI_OnDialogueClose(object sender, EventArgs e)
     {
         isCanvasOpen = false;
-        Debug.Log(isCanvasOpen);
+    }
+
+    private void EndingUI_OnClose(object sender, EventArgs e)
+    {
+        isCanvasOpen = false;
     }
 
     ////////////////
@@ -61,10 +59,9 @@ public class PlayerInteract : MonoBehaviour
         {
             if (isCanvasOpen == false)
             {
-                Debug.Log("Interacting with " + selectedObject.gameObject.name);
+
                 selectedObject.Interact();
                 isCanvasOpen = true;
-                Debug.Log(isCanvasOpen);
             }
         }
     }
@@ -83,14 +80,14 @@ public class PlayerInteract : MonoBehaviour
         
         lastInteractDir = Camera.main.transform.forward;
 
-        // Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
+        //Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
 
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit hit, interactDistance, interactLayerMask))
         {
 
-            // Debug.Log("We hit " + hit.transform.gameObject.name + " " + hit.transform.position);
+            //Debug.Log("We hit " + hit.transform.gameObject.name + " " + hit.transform.position);
 
-            if (hit.transform.TryGetComponent(out ObjectInteraction objectBeingTouched))
+            if (hit.transform.TryGetComponent(out BasicInteraction objectBeingTouched))
             {
                 if (objectBeingTouched != selectedObject)
                 {
@@ -112,7 +109,7 @@ public class PlayerInteract : MonoBehaviour
         }
     }
 
-    private void SetSelectedObject(ObjectInteraction newObject)
+    private void SetSelectedObject(BasicInteraction newObject)
     {
         if (selectedObject != newObject) //if the counter selected is not the param counter send in, e.g. null, clear counter, etc
         {

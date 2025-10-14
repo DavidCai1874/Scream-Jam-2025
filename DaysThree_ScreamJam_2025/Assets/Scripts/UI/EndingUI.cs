@@ -6,19 +6,18 @@ using TMPro;
 using System;
 using UnityEngine.EventSystems;
 
-public class DialogueUI : MonoBehaviour
+public class EndingUI : MonoBehaviour
 {
-    public static DialogueUI Instance;
+    public static EndingUI Instance;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private GameManager gameManager;
 
     public GameObject panel;
-    public Image dialogueImage;
     public TMP_Text dialogueText;
 
     private bool isOpen = false;
 
-    public event EventHandler OnDialogueClose;
+    public event EventHandler OnEndingClose;
 
 
     void Awake()
@@ -48,30 +47,30 @@ public class DialogueUI : MonoBehaviour
     }
 
 
-    public void ShowDialogue(InteractableObjectSO interactableObjectSO)
+    public void ShowDialogue(EndingSO endingSO)
     {
-        dialogueImage.sprite = interactableObjectSO.image;
-        dialogueText.text = interactableObjectSO.GetDialogueText();
+        
         panel.SetActive(true);
+        if(gameManager.interactedCount >= 1)
+        {
+            dialogueText.text = endingSO.All_Text();
+        }
+        else
+        {
+            dialogueText.text = endingSO.NotEnough_Text();
+        }
         isOpen = true;
     }
-
-
-    public void ShowStaircase()
-    {
-        dialogueImage.sprite = null;
-
-
-
-        panel.SetActive(true);
-        isOpen = true;
-    }
-
 
 
     private void CloseDialogue()
     {
         panel.SetActive(false);
-        OnDialogueClose?.Invoke(this, EventArgs.Empty);
+        OnEndingClose?.Invoke(this, EventArgs.Empty);
+        if(gameManager.interactedCount >= 1)
+        {
+            Loader.Load(Loader.Scene.Day2_Scene);
+        }
+
     }
 }

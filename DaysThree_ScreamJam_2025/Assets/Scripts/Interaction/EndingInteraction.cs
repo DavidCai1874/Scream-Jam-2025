@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndingInteraction : MonoBehaviour
+public class EndingInteraction : BasicInteraction
 {
     public EndingSO endingSO;
 
@@ -11,9 +11,10 @@ public class EndingInteraction : MonoBehaviour
 
     }
 
-    public void Interact()
+    public override void Interact()
     {
-        DialogueUI.Instance.ShowDialogue(interactableObjectSO);
+        Debug.Log("Ending Interacted");
+        EndingUI.Instance.ShowDialogue(endingSO);
     }
 
 }

@@ -7,12 +7,9 @@ using UnityEngine.InputSystem;
 
 public class GameInput : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     public static GameInput Instance { get; private set; }
 
-    public event EventHandler OnInteractAction; //hit E
-    public event EventHandler OnPauseAction; // hit pause
+    public event EventHandler E_Pressed; //hit E
 
     public enum Binding
     {
@@ -30,7 +27,6 @@ public class GameInput : MonoBehaviour
 
         //bindings
         playerInputAction.Player.Interact.performed += Interact_performed; // when the key in Interact "E" is hit, call this function
-        playerInputAction.Player.Pause.performed += Pause_performed;
 
 
     }
@@ -40,21 +36,14 @@ public class GameInput : MonoBehaviour
         Instance = null;
 
         playerInputAction.Player.Interact.performed -= Interact_performed; // when the key in Interact "E" is hit, call this function
-        playerInputAction.Player.Pause.performed -= Pause_performed;
 
         playerInputAction.Dispose();
     }
 
 
-    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-    {
-        OnPauseAction?.Invoke(this, EventArgs.Empty); // send to game manager, toggle the pause
-        Debug.Log("Pause pressed");
-    }
-
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) //parameter including infos about the key pressed
     {
-        OnInteractAction?.Invoke(this, EventArgs.Empty);
+        E_Pressed?.Invoke(this, EventArgs.Empty);
         Debug.Log("Interact pressed");
     }
 

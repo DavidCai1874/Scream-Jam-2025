@@ -13,6 +13,7 @@ public static class Loader
         MainMenuScene,
         Loading_Scene_Normal,
         Day1_Scene,
+        Day2_Scene,
     }
 
     public static void Load(Scene targetScene) //send in target scene

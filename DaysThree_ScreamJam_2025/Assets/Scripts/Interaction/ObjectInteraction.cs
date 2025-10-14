@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectInteraction : MonoBehaviour
+public class ObjectInteraction : BasicInteraction
 {
 
     public InteractableObjectSO interactableObjectSO;
@@ -43,7 +43,7 @@ public class ObjectInteraction : MonoBehaviour
         _renderer.material = state ? highlightMat : _originalMat;
     }
 
-    public void Interact()
+    public override void Interact()
     {
         if (_isInteracted) return;
         _isInteracted = true;

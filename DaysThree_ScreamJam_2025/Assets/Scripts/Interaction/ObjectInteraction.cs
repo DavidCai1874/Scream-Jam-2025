@@ -3,25 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectInteraction : MonoBehaviour
+public class ObjectInteraction : BasicInteraction
 {
 
     public InteractableObjectSO interactableObjectSO;
     public GameObject oldGeo;
+    public GameObject highlightGeo;
     public GameObject newGeo;
 
-    private Material _originalMat;
-    public Material highlightMat;
-    private Renderer _renderer;
     private bool _isInteracted = false;
 
     void Start()
     {
-        _renderer = GetComponent<Renderer>();
-        _originalMat = _renderer.material;
         _isInteracted = false;
 
-        if (newGeo != null) newGeo.SetActive(false);
+        highlightGeo.SetActive(false);
+        newGeo.SetActive(false);
+
         PlayerInteract.Instance.OnSelectedObjectChanged += PlayerInteract_OnSelectedObjectChanged;
     }
 
@@ -40,20 +38,31 @@ public class ObjectInteraction : MonoBehaviour
     public void Highlight(bool state)
     {
         if (_isInteracted) return;
-        _renderer.material = state ? highlightMat : _originalMat;
+        oldGeo.SetActive(!state);
+        highlightGeo.SetActive(state);
     }
 
-    public void Interact()
+    public override void Interact()
     {
-        if (_isInteracted) return;
+        if (_isInteracted)
+        {
+            DialogueUI.Instance.returnInteract();
+            return;
+        }
+        Debug.Log(_isInteracted);
         _isInteracted = true;
         
         GameManager.Instance.AddInteraction();
 
-        if (oldGeo != null) oldGeo.SetActive(false);
-        if (newGeo != null) newGeo.SetActive(true);
+        GameManager.Instance.sfxPlayer.PlayOneShot(interactableObjectSO.interactionSound);
+
+        highlightGeo.SetActive(false);
+        oldGeo.SetActive(false);
+        newGeo.SetActive(true);
 
         DialogueUI.Instance.ShowDialogue(interactableObjectSO);
+
+
     }
 
 }

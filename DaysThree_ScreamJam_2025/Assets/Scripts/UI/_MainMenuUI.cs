@@ -14,8 +14,7 @@ public class MainMenuUI : MonoBehaviour
     {
         playButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.Day1_Scene);
-            Debug.Log("Play button clicked, loading Day1_Scene");
+            Loader.LoadNormal(Loader.Scene.Day1_Scene);
         });
     }
 

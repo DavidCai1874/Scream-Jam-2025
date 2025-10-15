@@ -76,11 +76,11 @@ public class PlayerInteract : MonoBehaviour
     private void HandleInteractions()
     {
 
-        float interactDistance = 3f;
+        float interactDistance = 3.6f;
         
         lastInteractDir = Camera.main.transform.forward;
 
-        //Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
+        Debug.DrawRay(transform.position, lastInteractDir * interactDistance, Color.red);
 
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit hit, interactDistance, interactLayerMask))
         {

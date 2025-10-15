@@ -43,7 +43,9 @@ public class PlayerInteract : MonoBehaviour
 
     private void DialogueUI_OnDialogueClose(object sender, EventArgs e)
     {
+        Debug.Log("Dialogue closed, is canvas should be false");
         isCanvasOpen = false;
+        Debug.Log(isCanvasOpen);
     }
 
     private void EndingUI_OnClose(object sender, EventArgs e)
@@ -54,12 +56,11 @@ public class PlayerInteract : MonoBehaviour
     ////////////////
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
-        //Debug.Log("E key pressed!");
+        Debug.Log(isCanvasOpen);
         if (selectedObject != null)
         {
             if (isCanvasOpen == false)
             {
-
                 selectedObject.Interact();
                 isCanvasOpen = true;
             }

@@ -67,11 +67,17 @@ public class DialogueUI : MonoBehaviour
         isOpen = true;
     }
 
-
+    public void returnInteract()
+    {
+        OnDialogueClose?.Invoke(this, EventArgs.Empty);
+    }
 
     private void CloseDialogue()
     {
+        Debug.Log("Dialogue Closed");
         panel.SetActive(false);
         OnDialogueClose?.Invoke(this, EventArgs.Empty);
     }
+
+    
 }

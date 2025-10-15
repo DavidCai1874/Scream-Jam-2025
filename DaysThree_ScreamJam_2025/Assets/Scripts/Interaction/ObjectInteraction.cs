@@ -44,7 +44,12 @@ public class ObjectInteraction : BasicInteraction
 
     public override void Interact()
     {
-        if (_isInteracted) return;
+        if (_isInteracted)
+        {
+            DialogueUI.Instance.returnInteract();
+            return;
+        }
+        Debug.Log(_isInteracted);
         _isInteracted = true;
         
         GameManager.Instance.AddInteraction();

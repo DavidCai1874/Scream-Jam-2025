@@ -17,8 +17,6 @@ public class EndingUI_Day1 : MonoBehaviour
 
     private bool isOpen = false;
 
-    public event EventHandler OnEndingClose;
-
 
     void Awake()
     {
@@ -49,15 +47,20 @@ public class EndingUI_Day1 : MonoBehaviour
 
     public void ShowDialogue(EndingSO endingSO)
     {
-        
+        Debug.Log("Show Ending Dialogue");
         panel.SetActive(true);
-        if(gameManager.interactedCount >= 1)
+        if(gameManager.interactedCount < 2)
         {
-            dialogueText.text = endingSO.All_Text();
+            Debug.Log("Not Enough");
+            dialogueText.text = endingSO.NotEnough_Text();
+        }
+        else if(gameManager.interactedCount <= 4)
+        {
+            dialogueText.text = endingSO.Enough_Text();
         }
         else
         {
-            dialogueText.text = endingSO.NotEnough_Text();
+            dialogueText.text = endingSO.All_Text();
         }
         isOpen = true;
     }
@@ -66,8 +69,7 @@ public class EndingUI_Day1 : MonoBehaviour
     private void CloseDialogue()
     {
         panel.SetActive(false);
-        OnEndingClose?.Invoke(this, EventArgs.Empty);
-        if(gameManager.interactedCount >= 1)
+        if(gameManager.interactedCount >= 2)
         {
             Loader.LoadNormal(Loader.Scene.Day2_Scene);
         }

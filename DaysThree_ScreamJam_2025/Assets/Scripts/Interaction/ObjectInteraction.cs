@@ -13,15 +13,28 @@ public class ObjectInteraction : BasicInteraction
 
     private bool _isInteracted = false;
 
-    void Start()
+
+    private void Awake()
     {
         _isInteracted = false;
 
         highlightGeo.SetActive(false);
         newGeo.SetActive(false);
+    }
 
+
+    private void Start()
+    {
         PlayerInteract.Instance.OnSelectedObjectChanged += PlayerInteract_OnSelectedObjectChanged;
     }
+
+    private void OnDestroy()
+    {
+
+        PlayerInteract.Instance.OnSelectedObjectChanged -= PlayerInteract_OnSelectedObjectChanged;
+
+    }
+
 
     private void PlayerInteract_OnSelectedObjectChanged(object sender, PlayerInteract.OnSelectedObjectChangedEventArgs e)
     {
@@ -44,12 +57,7 @@ public class ObjectInteraction : BasicInteraction
 
     public override void Interact()
     {
-        if (_isInteracted)
-        {
-            DialogueUI.Instance.returnInteract();
-            return;
-        }
-        Debug.Log(_isInteracted);
+        if (_isInteracted) return;
         _isInteracted = true;
         
         GameManager.Instance.AddInteraction();

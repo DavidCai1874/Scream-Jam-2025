@@ -10,7 +10,6 @@ public class DialogueUI : MonoBehaviour
 {
     public static DialogueUI Instance;
     [SerializeField] private GameInput gameInput;
-    [SerializeField] private GameManager gameManager;
 
     public GameObject panel;
     public Image dialogueImage;
@@ -56,27 +55,9 @@ public class DialogueUI : MonoBehaviour
         isOpen = true;
     }
 
-
-    public void ShowStaircase()
-    {
-        dialogueImage.sprite = null;
-
-
-
-        panel.SetActive(true);
-        isOpen = true;
-    }
-
-    public void returnInteract()
-    {
-        OnDialogueClose?.Invoke(this, EventArgs.Empty);
-    }
-
     private void CloseDialogue()
     {
-        Debug.Log("Dialogue Closed");
         panel.SetActive(false);
-        OnDialogueClose?.Invoke(this, EventArgs.Empty);
     }
 
     

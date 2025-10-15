@@ -31,39 +31,21 @@ public class PlayerInteract : MonoBehaviour
     private void Start()
     {
         gameInput.E_Pressed += GameInput_OnInteractAction;
-        DialogueUI.Instance.OnDialogueClose += DialogueUI_OnDialogueClose;
-        EndingUI_Day1.Instance.OnEndingClose += EndingUI_OnClose;
     }
     private void OnDestroy()
     {
         gameInput.E_Pressed -= GameInput_OnInteractAction;
-        DialogueUI.Instance.OnDialogueClose -= DialogueUI_OnDialogueClose;
-        EndingUI_Day1.Instance.OnEndingClose -= EndingUI_OnClose;
     }
 
-    private void DialogueUI_OnDialogueClose(object sender, EventArgs e)
-    {
-        Debug.Log("Dialogue closed, is canvas should be false");
-        isCanvasOpen = false;
-        Debug.Log(isCanvasOpen);
-    }
 
-    private void EndingUI_OnClose(object sender, EventArgs e)
-    {
-        isCanvasOpen = false;
-    }
-
-    ////////////////
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
-        Debug.Log(isCanvasOpen);
         if (selectedObject != null)
         {
-            if (isCanvasOpen == false)
-            {
-                selectedObject.Interact();
-                isCanvasOpen = true;
-            }
+
+            selectedObject.Interact();
+            isCanvasOpen = true;
+
         }
     }
 
@@ -99,7 +81,6 @@ public class PlayerInteract : MonoBehaviour
             }
             else
             {
-                //RemoveHighlight();
                 SetSelectedObject(null);
             }
 

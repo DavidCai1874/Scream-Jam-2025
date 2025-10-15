@@ -13,7 +13,6 @@ public class Day1_EndingInteraction : BasicInteraction
 
     public override void Interact()
     {
-        Debug.Log("Ending Interacted");
         EndingUI_Day1.Instance.ShowDialogue(endingSO);
     }
 

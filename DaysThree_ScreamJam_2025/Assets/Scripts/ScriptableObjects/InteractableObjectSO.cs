@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "InteractableObjectSO")]
 public class InteractableObjectSO : ScriptableObject
 {
-    public string title;
     public TextAsset dialogueTextFile;
     public Sprite image;
+    public AudioClip interactionSound;
 
     public string GetDialogueText()
     {

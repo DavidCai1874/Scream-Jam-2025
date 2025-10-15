@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537ff2ec700d3e941bb1492fe2097cf3, type: 3}
+  m_Name: blood_on_floor
+  m_EditorClassIdentifier: 
+  dialogueTextFile: {fileID: 4900000, guid: bf8021b332a33d94e9eb403e9285b5d2, type: 3}
+  image: {fileID: 21300000, guid: 8d7648c4bd0f60d4fab7ceacd48d17cb, type: 3}
+  interactionSound: {fileID: 8300000, guid: 062f9de8ac68c1a44a881f2999ab9fdc, type: 3}

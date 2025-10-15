@@ -32,13 +32,13 @@ public class PlayerInteract : MonoBehaviour
     {
         gameInput.E_Pressed += GameInput_OnInteractAction;
         DialogueUI.Instance.OnDialogueClose += DialogueUI_OnDialogueClose;
-        EndingUI.Instance.OnEndingClose += EndingUI_OnClose;
+        EndingUI_Day1.Instance.OnEndingClose += EndingUI_OnClose;
     }
     private void OnDestroy()
     {
         gameInput.E_Pressed -= GameInput_OnInteractAction;
         DialogueUI.Instance.OnDialogueClose -= DialogueUI_OnDialogueClose;
-        EndingUI.Instance.OnEndingClose -= EndingUI_OnClose;
+        EndingUI_Day1.Instance.OnEndingClose -= EndingUI_OnClose;
     }
 
     private void DialogueUI_OnDialogueClose(object sender, EventArgs e)

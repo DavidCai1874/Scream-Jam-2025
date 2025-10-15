@@ -35,16 +35,15 @@ public class GameInput : MonoBehaviour
     {
         Instance = null;
 
-        playerInputAction.Player.Interact.performed -= Interact_performed; // when the key in Interact "E" is hit, call this function
+        playerInputAction.Player.Interact.performed -= Interact_performed;
 
         playerInputAction.Dispose();
     }
 
 
-    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj) //parameter including infos about the key pressed
+    private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         E_Pressed?.Invoke(this, EventArgs.Empty);
-        Debug.Log("Interact pressed");
     }
 
 

@@ -14,7 +14,7 @@ public class EndingInteraction : BasicInteraction
     public override void Interact()
     {
         Debug.Log("Ending Interacted");
-        EndingUI.Instance.ShowDialogue(endingSO);
+        EndingUI_Day1.Instance.ShowDialogue(endingSO);
     }
 
 }

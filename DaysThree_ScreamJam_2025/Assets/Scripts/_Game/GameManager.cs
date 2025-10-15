@@ -7,6 +7,9 @@ using static UnityEngine.CullingGroup;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    
+    public AudioSource sfxPlayer;
+
     public int interactedCount = 0;
 
     void Awake()
@@ -17,6 +20,5 @@ public class GameManager : MonoBehaviour
     public void AddInteraction()
     {
         interactedCount++;
-        Debug.Log("Interacted: " + interactedCount);
     }
 }

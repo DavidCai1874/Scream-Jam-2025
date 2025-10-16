@@ -47,11 +47,9 @@ public class EndingUI_Day1 : MonoBehaviour
 
     public void ShowDialogue(EndingSO endingSO)
     {
-        Debug.Log("Show Ending Dialogue");
         panel.SetActive(true);
         if(gameManager.interactedCount < 2)
         {
-            Debug.Log("Not Enough");
             dialogueText.text = endingSO.NotEnough_Text();
         }
         else if(gameManager.interactedCount <= 4)

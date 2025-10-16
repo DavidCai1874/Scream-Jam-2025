@@ -1,0 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class EndingUI_Day2 : MonoBehaviour
+{
+    public static EndingUI_Day2 Instance;
+    [SerializeField] private GameInput gameInput;
+    [SerializeField] private GameManager gameManager;
+    public AudioClip endSound;
+    public GameObject panel;
+    public TMP_Text dialogueText;
+
+    private bool isOpen = false;
+
+
+    void Awake()
+    {
+        Instance = this;
+        panel.SetActive(false);
+        isOpen = false;
+    }
+
+    private void Start()
+    {
+        gameInput.E_Pressed += GameInput_OnInteractAction;
+    }
+
+    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    {
+        if (isOpen)
+        {
+            CloseDialogue();
+            isOpen = false;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        gameInput.E_Pressed -= GameInput_OnInteractAction;
+    }
+
+
+    public void ShowDialogue(EndingSO endingSO)
+    {
+        panel.SetActive(true);
+        if (gameManager.interactedCount <= 1)
+        {
+            dialogueText.text = endingSO.NotEnough_Text();
+        }
+        else if (gameManager.interactedCount <= 3)
+        {
+            GameManager.Instance.sfxPlayer.PlayOneShot(endSound);
+            dialogueText.text = endingSO.Enough_Text();
+        }
+        else
+        {
+            dialogueText.text = endingSO.All_Text();
+        }
+        isOpen = true;
+    }
+
+
+    private void CloseDialogue()
+    {
+        panel.SetActive(false);
+        if (gameManager.interactedCount >= 2 && gameManager.interactedCount <= 3)
+        {
+            Loader.LoadNormal(Loader.Scene.Ending_Normal);
+        }
+        else if (gameManager.interactedCount == 4)
+        {
+            Loader.LoadHidden(Loader.Scene.Ending_Redemption);
+        }
+
+    }
+}

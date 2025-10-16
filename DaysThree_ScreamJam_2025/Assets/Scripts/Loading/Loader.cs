@@ -10,11 +10,13 @@ public static class Loader
 
     public enum Scene
     {
-        MainMenuScene,
+        Main_Menu_Scene,
         Loading_Scene_Normal,
         Loading_Scene_Redemption,
         Day1_Scene,
         Day2_Scene,
+        Ending_Normal,
+        Ending_Redemption
     }
 
     public static void LoadNormal(Scene targetScene)

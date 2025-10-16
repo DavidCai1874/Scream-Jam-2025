@@ -13,7 +13,6 @@ public class PlayerInteract : MonoBehaviour
 
     private Vector3 lastInteractDir;
     private BasicInteraction selectedObject;
-    private bool isCanvasOpen = false;
 
 
     public event EventHandler<OnSelectedObjectChangedEventArgs> OnSelectedObjectChanged;
@@ -25,7 +24,6 @@ public class PlayerInteract : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        isCanvasOpen = false;
     }
 
     private void Start()
@@ -44,7 +42,6 @@ public class PlayerInteract : MonoBehaviour
         {
 
             selectedObject.Interact();
-            isCanvasOpen = true;
 
         }
     }

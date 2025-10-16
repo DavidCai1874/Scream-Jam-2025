@@ -17,8 +17,6 @@ public class DialogueUI : MonoBehaviour
 
     private bool isOpen = false;
 
-    public event EventHandler OnDialogueClose;
-
 
     void Awake()
     {

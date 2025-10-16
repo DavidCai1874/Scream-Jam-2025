@@ -1,0 +1,28 @@
+You wake up in your house, but something feels wrong…Fragments of memory hide in every corner, silent witnesses to what you’ve done. Find them. Destroy them. Will you escape your past — or confront the truth that breaks you?
+
+***
+
+Team members:
+
+Unity - David
+
+Modeller - Viviana
+
+2D Art - Minnie
+
+SFX - Tristan
+
+***
+
+3- 10 minutes game experience.
+
+Controls:
+
+- WASD to move
+
+- Mouse to look
+
+- E to interact
+
+Created for SCREAM JAM 2025.
+
